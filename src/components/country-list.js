@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Country from "./country";
 
@@ -12,36 +12,30 @@ const CountryListStyled = styled.div`
 `;
 
 const CountryList = () => {
+  const [countryList, setCountryList] = useState([]);
+  useEffect(() => {
+    fetch("https://restcountries.eu/rest/v2/all")
+      .then((json) => json.json())
+      .then((data) => setCountryList(data))
+      .catch(() => {
+        console.log("Error al obtener los paises");
+      });
+  }, []);
   return (
     <CountryListStyled>
-      <Country
-        flag="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Flag_of_Chile.svg/255px-Flag_of_Chile.svg.png"
-        name="Chile"
-        population={123123}
-        region="America"
-        capitale="Santiago"
-      />
-      <Country
-        flag="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Flag_of_Chile.svg/255px-Flag_of_Chile.svg.png"
-        name="Chile"
-        population={123123}
-        region="America"
-        capitale="Santiago"
-      />
-      <Country
-        flag="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Flag_of_Chile.svg/255px-Flag_of_Chile.svg.png"
-        name="Chile"
-        population={123123}
-        region="America"
-        capitale="Santiago"
-      />
-      <Country
-        flag="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Flag_of_Chile.svg/255px-Flag_of_Chile.svg.png"
-        name="Chile"
-        population={123123}
-        region="America"
-        capitale="Santiago"
-      />
+      {countryList !== undefined &&
+        countryList.map(
+          ({ numericCode, flag, name, population, region, capital }) => (
+            <Country
+              key={numericCode}
+              flag={flag}
+              name={name}
+              population={population}
+              region={region}
+              capitale={capital}
+            />
+          )
+        )}
     </CountryListStyled>
   );
 };
