@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
 const CountryStyled = styled.div`
   width: 264px;
@@ -17,7 +17,7 @@ const CountryStyled = styled.div`
   }
   h2 {
     margin: 0;
-    marging-bottom: 1rem;
+    margin-bottom: 1rem;
     font-size: 18px;
     font-weight: 700;
   }
@@ -25,13 +25,24 @@ const CountryStyled = styled.div`
     font-size: 0.9em;
     margin-bottom: 0.2rem;
   }
-`;
+`
 
-const Country = ({ flag, name, population, region, capitale }) => {
+const Country = ({
+  id,
+  flag,
+  name,
+  population,
+  region,
+  capitale,
+  getCountry,
+}) => {
+  const getDetail = (event) => {
+    getCountry(id)
+  }
   return (
     <CountryStyled>
-      <img loading="lazy" src={flag} alt={name} />
-      <div className="details">
+      <img loading='lazy' src={flag} alt={name} onClick={getDetail} />
+      <div className='details'>
         <h2>{name}</h2>
         <p>
           <b>Population: </b>
@@ -47,7 +58,7 @@ const Country = ({ flag, name, population, region, capitale }) => {
         </p>
       </div>
     </CountryStyled>
-  );
-};
+  )
+}
 
-export default Country;
+export default Country
