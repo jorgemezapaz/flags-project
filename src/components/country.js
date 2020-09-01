@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 
 const CountryStyled = styled.div`
-  width: 264px;
   text-align: left;
   border-radius: 5px;
   box-shadow: 0 0 7px 2px rgba(0, 0, 0, 0.03);
@@ -27,21 +27,15 @@ const CountryStyled = styled.div`
   }
 `
 
-const Country = ({
-  id,
-  flag,
-  name,
-  population,
-  region,
-  capitale,
-  getCountry,
-}) => {
-  const getDetail = (event) => {
-    getCountry(id)
+const Country = ({ id, flag, name, population, region, capitale }) => {
+  let history = useHistory()
+
+  const getDetail = () => {
+    history.push(`/country/${id}`)
   }
   return (
-    <CountryStyled>
-      <img loading='lazy' src={flag} alt={name} onClick={getDetail} />
+    <CountryStyled onClick={getDetail}>
+      <img loading='lazy' src={flag} alt={name} />
       <div className='details'>
         <h2>{name}</h2>
         <p>

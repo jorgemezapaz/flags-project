@@ -2,10 +2,14 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Country from './country'
 import { useSelector, useDispatch } from 'react-redux'
+import WrapperStyled from './wrapper'
 
 const CountryListStyled = styled.div`
   display: grid;
   grid-row-gap: 2.3em;
+  grid-auto-flow: columns;
+  grid-template-columns: repeat(auto-fill, minMax(0, 264px));
+  grid-column-gap: 80px;
   background: var(--background);
   padding: 4em 2em;
   justify-content: center;
@@ -35,13 +39,6 @@ const CountryList = () => {
     countryList = countryListByName
   }
 
-  const findCountryById = (id) => {
-    dispatch({
-      type: 'GET_COUNTRY_BY_ID',
-      payload: id,
-    })
-  }
-
   useEffect(() => {
     fetch('https://restcountries.eu/rest/v2/all')
       .then((json) => json.json())
@@ -57,31 +54,32 @@ const CountryList = () => {
   }, [])
 
   return (
-    <CountryListStyled>
-      {countryNameSearched.trim() !== '' && countryList.length === 0 && (
-        <p>No se encontraron resultados</p>
-      )}
-      {countryNameSearched.trim() === '' && countryList.length === 0 && (
-        <p>
-          <b>Loading....</b>
-        </p>
-      )}
-      {countryList.length > 0 &&
-        countryList.map(
-          ({ numericCode, flag, name, population, region, capital }) => (
-            <Country
-              key={numericCode}
-              id={numericCode}
-              flag={flag}
-              name={name}
-              population={population}
-              region={region}
-              capitale={capital}
-              getCountry={findCountryById}
-            />
-          )
+    <WrapperStyled>
+      <CountryListStyled>
+        {countryNameSearched.trim() !== '' && countryList.length === 0 && (
+          <p>No se encontraron resultados</p>
         )}
-    </CountryListStyled>
+        {countryNameSearched.trim() === '' && countryList.length === 0 && (
+          <p>
+            <b>Loading....</b>
+          </p>
+        )}
+        {countryList.length > 0 &&
+          countryList.map(
+            ({ numericCode, flag, name, population, region, capital }) => (
+              <Country
+                key={numericCode}
+                id={numericCode}
+                flag={flag}
+                name={name}
+                population={population}
+                region={region}
+                capitale={capital}
+              />
+            )
+          )}
+      </CountryListStyled>
+    </WrapperStyled>
   )
 }
 

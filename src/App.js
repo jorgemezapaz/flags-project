@@ -6,6 +6,8 @@ import { createStore } from 'redux'
 import reducer from './reducer'
 import ActionsList from './components/actions-list'
 import Header from './components/header'
+import CountryDetail from './components/country-detail'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 const initialState = {
   countryList: [],
@@ -21,9 +23,16 @@ const store = createStore(reducer, initialState)
 const App = () => {
   return (
     <Provider store={store}>
-      <Header />
-      <ActionsList />
-      <CountryList />
+      <Router>
+        <Header />
+        <Switch>
+          <Route exact path='/'>
+            <ActionsList />
+            <CountryList />
+          </Route>
+          <Route path='/country/:id' component={CountryDetail} />
+        </Switch>
+      </Router>
     </Provider>
   )
 }

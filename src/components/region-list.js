@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 
 const RegionFilterListStyled = styled.select`
-  height: 40px;
+  height: 48px;
   border: none;
   box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.05);
   outline: 0;
