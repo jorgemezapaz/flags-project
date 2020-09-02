@@ -22,6 +22,8 @@ const CountryDetailStyled = styled.div`
     }
     .details {
       padding: 1.5em;
+      border: 1px solid transparent;
+      border-top: none;
     }
     h2 {
       margin: 0;
@@ -66,6 +68,10 @@ const CountryDetail = ({ match }) => {
           <div className='details'>
             <h2>{countryDetail.name}</h2>
             <p>
+              <b>Native Name: </b>
+              {countryDetail.nativeName}
+            </p>
+            <p>
               <b>Population: </b>
               {countryDetail.population}
             </p>
@@ -74,8 +80,19 @@ const CountryDetail = ({ match }) => {
               {countryDetail.region}
             </p>
             <p>
+              <b>Sub Region: </b>
+              {countryDetail.subregion}
+            </p>
+            <p>
               <b>Capital: </b>
               {countryDetail.capital}
+            </p>
+            <p>
+              <b>Top Level Domain: </b>
+              {countryDetail.topLevelDomain}
+            </p>
+            <p>
+              <b>Languages: </b>
             </p>
           </div>
         </div>

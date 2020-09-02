@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 const SearchCountryStyled = styled.label`
   position: relative;
   display: inline-flex;
-  background: white;
+  background: var(--white);
   align-items: center;
   padding: 0 1rem;
   box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.05);
@@ -15,6 +15,8 @@ const SearchCountryStyled = styled.label`
     color: #c4c4c4;
   }
   input {
+    background: var(--white);
+    color: var(--black);
     flex: 1;
     height: 48px;
     line-height: 48px;
