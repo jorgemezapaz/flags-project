@@ -1,23 +1,35 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 
 const CountryStyled = styled.div`
-  width: 264px;
   text-align: left;
   border-radius: 5px;
   box-shadow: 0 0 7px 2px rgba(0, 0, 0, 0.03);
-  overflow: hidden;
+
+  cursor: pointer;
+  &:hover .details {
+    border-radius: 0 0 5px 5px;
+    border: 1px solid var(--black);
+    border-top: none;
+  }
   img {
     height: 160px;
     object-fit: cover;
     width: 100%;
+    vertical-align: top;
+    border-radius: 5px 5px 0 0;
   }
   .details {
     padding: 1.5em;
+    border: 1px solid transparent;
+    border-top: none;
+    transition: 0.3s;
+    background: var(--white);
   }
   h2 {
     margin: 0;
-    marging-bottom: 1rem;
+    margin-bottom: 1rem;
     font-size: 18px;
     font-weight: 700;
   }
@@ -25,13 +37,18 @@ const CountryStyled = styled.div`
     font-size: 0.9em;
     margin-bottom: 0.2rem;
   }
-`;
+`
 
-const Country = ({ flag, name, population, region, capitale }) => {
+const Country = ({ id, flag, name, population, region, capitale }) => {
+  let history = useHistory()
+
+  const getDetail = () => {
+    history.push(`/country/${id}`)
+  }
   return (
-    <CountryStyled>
-      <img src={flag} alt={name} />
-      <div className="details">
+    <CountryStyled onClick={getDetail}>
+      <img loading='lazy' src={flag} alt={name} />
+      <div className='details'>
         <h2>{name}</h2>
         <p>
           <b>Population: </b>
@@ -47,7 +64,7 @@ const Country = ({ flag, name, population, region, capitale }) => {
         </p>
       </div>
     </CountryStyled>
-  );
-};
+  )
+}
 
-export default Country;
+export default Country
